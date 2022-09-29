@@ -1921,18 +1921,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _main_components_PostCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main-components/PostCard.vue */ "./resources/js/components/main-components/PostCard.vue");
-/* harmony import */ var _main_components_TagsCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main-components/TagsCard.vue */ "./resources/js/components/main-components/TagsCard.vue");
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MainComponent",
   components: {
-    PostCard: _main_components_PostCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    TagsCard: _main_components_TagsCard_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    PostCard: PostCard,
+    TagsCard: TagsCard
   },
   computed: {
     arePosts: function arePosts() {
@@ -1944,66 +1937,23 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {
-      posts: [],
-      tags: [],
-      url: 'http://127.0.0.1:8000/api/',
-      topic: 'posts',
-      currentPage: null,
-      nextPage: '',
-      previousPage: '',
-      lastPage: '',
-      isLoaded: false
+    return {// topic : 'posts',
+      // currentPage: null,
+      // nextPage: '',
+      // previousPage: '',
+      // lastPage: '',
+      // isLoaded: false,
     };
   },
-  methods: {
-    log: function log(stuff) {
-      console.log(stuff);
-      this.currentPage = stuff;
-      this.getPosts();
-    },
-    modify: function modify() {
-      if (this.arePosts === true) {
-        this.getPosts();
-      } else {
-        this.getTags();
-      }
-    },
-    getTags: function getTags() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + this.topic).then(function (response) {
-        console.log(_this.topic);
-        console.warn(response.data);
-        _this.tags = response.data.results;
-        _this.isLoaded = true;
-      })["catch"](function (error) {
-        console.error(error);
-      });
-    },
-    getPosts: function getPosts() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + this.topic + '?', {
-        params: {
-          page: this.currentPage
-        }
-      }).then(function (response) {
-        console.log(_this2.topic);
-        console.error(response.data.results);
-        _this2.posts = response.data.results.data;
-        _this2.lastPage = parseInt(response.data.results.last_page);
-        console.log(_this2.lastPage);
-        _this2.isLoaded = true;
-      })["catch"](function (error) {
-        console.error(error);
-      });
-    }
+  methods: {// modify(){
+    //   if(this.arePosts === true){
+    //     this.getPosts();
+    //   }else{
+    //     this.getTags();
+    //   }
+    // },
   },
-  created: function created() {
-    this.getTags();
-    this.getPosts();
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -2066,7 +2016,53 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony import */ var _components_main_components_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/main-components/PostCard.vue */ "./resources/js/components/main-components/PostCard.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Homecomponent',
+  components: {
+    PostCard: _components_main_components_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      posts: [],
+      url: 'http://127.0.0.1:8000/api/posts',
+      lastPage: '',
+      isLoaded: false
+    };
+  },
+  methods: {
+    paginationNav: function paginationNav(indexes) {
+      console.log(indexes);
+      this.currentPage = indexes;
+      this.getPosts();
+    },
+    getPosts: function getPosts() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(this.url + '?', {
+        params: {
+          page: this.currentPage
+        }
+      }).then(function (response) {
+        console.log(_this.topic);
+        console.error(response.data.results);
+        _this.posts = response.data.results.data;
+        _this.lastPage = parseInt(response.data.results.last_page);
+        console.log(_this.lastPage);
+        _this.isLoaded = true;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    }
+  },
+  created: function created() {
+    this.getPosts();
+  }
+});
 
 /***/ }),
 
@@ -2079,7 +2075,40 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_main_components_TagsCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/main-components/TagsCard.vue */ "./resources/js/components/main-components/TagsCard.vue");
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TagsComponent",
+  components: {
+    TagsCard: _components_main_components_TagsCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      tags: [],
+      url: 'http://127.0.0.1:8000/api/tags'
+    };
+  },
+  methods: {
+    getTags: function getTags() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url).then(function (response) {
+        console.log(_this.topic);
+        console.warn(response.data);
+        _this.tags = response.data.results;
+        _this.isLoaded = true;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    }
+  },
+  created: function created() {
+    this.getTags();
+  }
+});
 
 /***/ }),
 
@@ -2145,80 +2174,17 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("main", [_vm.isLoaded ? _c("div", {
-    staticClass: "container"
-  }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-4 m-auto text-center my-5"
-  }, [_c("label", {
-    attrs: {
-      "for": "call"
-    }
-  }, [_vm._v("Select the call")]), _vm._v(" "), _c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.topic,
-      expression: "topic"
-    }],
-    staticClass: "form-select",
-    attrs: {
-      id: "call"
-    },
-    on: {
-      change: [function ($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.topic = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
-      }, function ($event) {
-        return _vm.modify();
-      }]
-    }
-  }, [_c("option", [_vm._v("posts")]), _vm._v(" "), _c("option", [_vm._v("tags")])])])]), _vm._v(" "), _vm.arePosts ? _c("div", {
-    staticClass: "row py-2 justify-content-center"
-  }, [_c("h1", {
-    staticClass: "text-center py-2"
-  }, [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _c("div", {
-    staticClass: "col-12 text-center py-3"
-  }, _vm._l(_vm.lastPage, function (index) {
-    return _c("span", {
-      key: index,
-      staticClass: "btn btn-primary mx-1 d-inline-block text-light",
-      on: {
-        click: function click($event) {
-          return _vm.log(index);
-        }
-      }
-    }, [_vm._v("\n              " + _vm._s(index) + "\n            ")]);
-  }), 0), _vm._v(" "), _vm._l(_vm.posts, function (post, index) {
-    return _c("PostCard", {
-      key: index,
-      attrs: {
-        post: post
-      }
-    });
-  })], 2) : _c("div", {
-    staticClass: "row"
-  }, [_c("h1", {
-    staticClass: "text-center py-2"
-  }, [_vm._v("\n          Tags:\n        ")]), _vm._v(" "), _vm._l(_vm.tags, function (tag) {
-    return _c("TagsCard", {
-      key: tag.id,
-      attrs: {
-        tag: tag
-      }
-    });
-  })], 2)]) : _c("div", {
-    staticClass: "text-center text-warning display-1"
-  }, [_vm._v("\n    Caricamento\n  ")])]);
+  return _vm._m(0);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("main", [_c("div", {
+    staticClass: "container"
+  })]);
+}];
 render._withStripped = true;
 
 
@@ -2346,7 +2312,30 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div");
+  return _c("section", {
+    staticClass: "row py-2 justify-content-center"
+  }, [_c("h1", {
+    staticClass: "text-center py-2"
+  }, [_vm._v("\n      Posts:\n      ")]), _vm._v(" "), _c("div", {
+    staticClass: "col-12 text-center py-3"
+  }, _vm._l(_vm.lastPage, function (index) {
+    return _c("span", {
+      key: index,
+      staticClass: "btn btn-primary mx-1 d-inline-block text-light",
+      on: {
+        click: function click($event) {
+          return _vm.paginationNav(index);
+        }
+      }
+    }, [_vm._v("\n          " + _vm._s(index) + "\n          ")]);
+  }), 0), _vm._v(" "), _vm._l(_vm.posts, function (post, index) {
+    return _c("PostCard", {
+      key: index,
+      attrs: {
+        post: post
+      }
+    });
+  })], 2);
 };
 
 var staticRenderFns = [];
@@ -2370,7 +2359,18 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div");
+  return _c("section", {
+    staticClass: "row"
+  }, [_c("h1", {
+    staticClass: "text-center py-2"
+  }, [_vm._v("\n        Tags:\n    ")]), _vm._v(" "), _vm._l(_vm.tags, function (tag) {
+    return _c("TagsCard", {
+      key: tag.id,
+      attrs: {
+        tag: tag
+      }
+    });
+  })], 2);
 };
 
 var staticRenderFns = [];
