@@ -8,19 +8,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/home">
-                        Home
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/posts">
-                        Posts
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/tags">
-                        Tags
+                <li v-for="(link, index) in navLinks" :key="index" class="nav-item text-capitalize" 
+                    :class="{ active_el : link.isActive === true }"
+                    @click="navActiveOnClick(index)">
+
+                    <router-link class="nav-link" :to="'/' + link.route">
+                        {{ link.name }}
                     </router-link>
                 </li>
             </ul>
@@ -33,9 +26,47 @@
 <script>
 export default {
     name: "HeaderComponent",
+    data: function(){
+        return{
+            navLinks:[
+                {
+                    route: 'home',
+                    name: 'home',
+                    isActive: true,
+                },
+                {
+                    route: 'posts',
+                    name: 'posts',
+                    isActive: false,
+                },
+                {
+                    route: 'tags',
+                    name: 'tags',
+                    isActive: false,
+                }
+   
+            ],
+        }
+    },
+    methods:{
+        navActiveOnClick(index) {
+            this.navLinks.forEach((element) => {
+                element.isActive = false;
+            });
+            console.warn(index);
+            this.navLinks[index].isActive = true;
+        },
+    },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+    .active_el{
+        a{
+            color: red;
+            border: solid 1px red;
+        }
+    }
 
 </style>
