@@ -15,6 +15,8 @@
         </div>
         
         <PostCard v-for="(post, index) in posts" :key="index" :post="post"/>
+
+        
     </div>
 
   </section>
@@ -24,6 +26,7 @@
 import PostCard from '../components/main-components/PostCard.vue';
 import LoaderComponent from '../components/LoaderComponent.vue';
 import axios from 'axios';
+
 export default {
     name: 'Homecomponent',
     components: {
@@ -39,7 +42,7 @@ export default {
             isLoaded: true,
         }
     },
-
+    
     methods:{
 
         paginationNav(indexes){

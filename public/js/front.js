@@ -2005,6 +2005,15 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     post: Object,
     required: true
+  },
+  methods: {
+    isShow: function isShow() {
+      if (this.$route.params.id !== undefined) {
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
 });
 
@@ -2408,7 +2417,11 @@ var render = function render() {
     staticClass: "card-body"
   }, [_c("h5", {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("h5", {
+  }, [_vm.isShow() ? _c("router-link", {
+    attrs: {
+      to: "/post/".concat(_vm.post.id)
+    }
+  }, [_vm._v("\n                " + _vm._s(_vm.post.title) + "\n            ")]) : _vm._e(), _vm._v(" "), _c("div", [_vm._v("\n                " + _vm._s(_vm.post.title) + "\n            ")])], 1), _vm._v(" "), _c("h5", {
     staticClass: "card-title"
   }, [_vm._v("Scritto da: " + _vm._s(_vm.post.user.name))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
