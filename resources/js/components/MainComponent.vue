@@ -23,7 +23,7 @@
               </span>
           </div>
           
-          <card v-for="(post, index) in posts" :key="index" :post="post"/>
+          <PostCard v-for="(post, index) in posts" :key="index" :post="post"/>
         </div>
         <div class="row" v-else>
           <h1 class="text-center py-2">
@@ -41,12 +41,13 @@
 
 <script>
 import axios from 'axios';
-import card from './main-components/card.vue';
+import PostCard from './main-components/PostCard.vue';
 import TagsCard from './main-components/TagsCard.vue';
 
 export default {
-    components:{
-        card,
+    name: "MainComponent",
+        components:{
+        PostCard,
         TagsCard,
     },
 
