@@ -11,26 +11,18 @@
             </select>
           </div>
         </div> -->
-
-        <HomeComponent />
-        <PostsComponent />
-        <TagsComponent />
+        <router-view></router-view>
         
     </div>
   </main>
 </template>
 
 <script>
-import HomeComponent from '../pages/HomeComponent.vue';
-import PostsComponent from '../pages/PostsComponent.vue';
-import TagsComponent from '../pages/TagsComponent.vue';
 
 export default {
     name: "MainComponent",
-        components:{
-        HomeComponent,
-        PostsComponent,
-        TagsComponent,
+    components:{
+
     },
 
     computed: {
