@@ -35,7 +35,7 @@ const router = new VueRouter({
             component: TagsComponent,
         },
         {
-            path: '/posts/:id',
+            path: '/post/:id',
             name: 'singlepost',
             component: SinglePost,
         }

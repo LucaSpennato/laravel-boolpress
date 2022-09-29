@@ -1,6 +1,9 @@
 <template>
-  <section class="row py-2 justify-content-center">
+  <section class="container-fluid py-2 justify-content-center">
 
+    <LoaderComponent v-if="isLoaded"/>
+
+    <div class="row" v-else>
         <h1 class="text-center py-2">
         Posts:
         </h1>
@@ -12,17 +15,20 @@
         </div>
         
         <PostCard v-for="(post, index) in posts" :key="index" :post="post"/>
+    </div>
 
   </section>
 </template>
 
 <script>
 import PostCard from '../components/main-components/PostCard.vue';
+import LoaderComponent from '../components/LoaderComponent.vue';
 import axios from 'axios';
 export default {
     name: 'Homecomponent',
     components: {
         PostCard,
+        LoaderComponent,
     },
 
     data: function(){
@@ -30,7 +36,7 @@ export default {
             posts: [],
             url: 'http://127.0.0.1:8000/api/posts',
             lastPage: '',
-            isLoaded: false,
+            isLoaded: true,
         }
     },
 
@@ -54,7 +60,7 @@ export default {
                 this.posts = response.data.results.data;
                 this.lastPage = parseInt(response.data.results.last_page);
                 console.log(this.lastPage);
-                this.isLoaded = true;
+                this.isLoaded = false;
 
             }).catch((error) =>{
                 console.error(error);

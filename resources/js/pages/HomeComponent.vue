@@ -3,7 +3,6 @@
     <div class="col-6 m-auto">
         Home!
     </div>
-
   </section>
 </template>
 
