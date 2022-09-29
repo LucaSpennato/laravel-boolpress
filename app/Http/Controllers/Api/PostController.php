@@ -64,12 +64,12 @@ class PostController extends Controller
         // ! Se è stato trovato, manda il dato, altrimenti 404. E' findOrFail ma manuale per poter dare la 404.
         // ! Con find or fail funzionerebbe allo stesso modo, ma restituisce l'intera pagina di 404, rallentando il tutto
         // ? insieme a with, possiamo mandare altre informazioni, vengono definite eager loading
-        $post = Post::with('user')->find($id);
+        $post = Post::with('user', 'tags')->find($id);
 
         if($post){
             return response()->json([
                 "success" => true,
-                "data" => $post,
+                "results" => $post,
             ]);
         }else{
             return response('', 404);

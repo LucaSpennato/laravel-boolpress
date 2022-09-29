@@ -26,25 +26,18 @@ export default {
     },
 
     computed: {
-       arePosts: function(){
-        if(this.topic === "posts"){
-          return true;
-        }else{
-          return false;
-        }
-      },
+      //  arePosts: function(){
+      //   if(this.topic === "posts"){
+      //     return true;
+      //   }else{
+      //     return false;
+      //   }
+      // },
     },
 
     data: function(){
     return{
       
-      
-      // topic : 'posts',
-      // currentPage: null,
-      // nextPage: '',
-      // previousPage: '',
-      // lastPage: '',
-      // isLoaded: false,
     }
   },
 

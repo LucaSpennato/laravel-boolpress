@@ -20,6 +20,7 @@ export default {
     name: "TagsCard",
     props: {
         tag : Object,
+        required : true,
     }
 }
 </script>

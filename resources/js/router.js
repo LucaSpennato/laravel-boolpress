@@ -9,6 +9,7 @@ import VueRouter from 'vue-router';
 import HomeComponent from './pages/HomeComponent';
 import PostsComponent from './pages/PostsComponent';
 import TagsComponent from './pages/TagsComponent';
+import SinglePost from './pages/SinglePost';
 
 // ! Creiamo un'istanza di vueRouter
 const router = new VueRouter({
@@ -33,6 +34,11 @@ const router = new VueRouter({
             name: 'tags',
             component: TagsComponent,
         },
+        {
+            path: '/posts/:id',
+            name: 'singlepost',
+            component: SinglePost,
+        }
     ],
 });
 

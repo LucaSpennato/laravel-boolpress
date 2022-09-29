@@ -16,6 +16,9 @@
                         {{ link.name }}
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/users">Admin</a>
+                </li>
             </ul>
             </div>
         </div>
@@ -43,8 +46,7 @@ export default {
                     route: 'tags',
                     name: 'tags',
                     isActive: false,
-                }
-   
+                },
             ],
         }
     },
