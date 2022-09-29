@@ -17,6 +17,7 @@
 
 <script>
 export default {
+    name: "TagsCard",
     props: {
         tag : Object,
     }
