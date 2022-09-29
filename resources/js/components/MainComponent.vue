@@ -12,20 +12,25 @@
           </div>
         </div> -->
 
-        
+        <HomeComponent />
+        <PostsComponent />
+        <TagsComponent />
         
     </div>
   </main>
 </template>
 
 <script>
-
+import HomeComponent from '../pages/HomeComponent.vue';
+import PostsComponent from '../pages/PostsComponent.vue';
+import TagsComponent from '../pages/TagsComponent.vue';
 
 export default {
     name: "MainComponent",
         components:{
-        PostCard,
-        TagsCard,
+        HomeComponent,
+        PostsComponent,
+        TagsComponent,
     },
 
     computed: {

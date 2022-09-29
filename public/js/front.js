@@ -1908,7 +1908,9 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "HeaderComponent"
+});
 
 /***/ }),
 
@@ -1921,11 +1923,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _pages_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/HomeComponent.vue */ "./resources/js/pages/HomeComponent.vue");
+/* harmony import */ var _pages_PostsComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/PostsComponent.vue */ "./resources/js/pages/PostsComponent.vue");
+/* harmony import */ var _pages_TagsComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/TagsComponent.vue */ "./resources/js/pages/TagsComponent.vue");
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MainComponent",
   components: {
-    PostCard: PostCard,
-    TagsCard: TagsCard
+    HomeComponent: _pages_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    PostsComponent: _pages_PostsComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TagsComponent: _pages_TagsComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   computed: {
     arePosts: function arePosts() {
@@ -2003,7 +2012,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'HomeComponent'
+});
 
 /***/ }),
 
@@ -2150,10 +2161,65 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div");
+  return _vm._m(0);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("nav", {
+    staticClass: "navbar navbar-dark bg-dark navbar-expand-lg"
+  }, [_c("div", {
+    staticClass: "container"
+  }, [_c("a", {
+    staticClass: "navbar-brand",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("BoolPress")]), _vm._v(" "), _c("button", {
+    staticClass: "navbar-toggler",
+    attrs: {
+      type: "button",
+      "data-bs-toggle": "collapse",
+      "data-bs-target": "#navbarNav",
+      "aria-controls": "navbarNav",
+      "aria-expanded": "false",
+      "aria-label": "Toggle navigation"
+    }
+  }, [_c("span", {
+    staticClass: "navbar-toggler-icon"
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "collapse navbar-collapse",
+    attrs: {
+      id: "navbarNav"
+    }
+  }, [_c("ul", {
+    staticClass: "navbar-nav"
+  }, [_c("li", {
+    staticClass: "nav-item"
+  }, [_c("a", {
+    staticClass: "nav-link active",
+    attrs: {
+      "aria-current": "page",
+      href: "#"
+    }
+  }, [_vm._v("Home")])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item"
+  }, [_c("a", {
+    staticClass: "nav-link",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Posts")])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item"
+  }, [_c("a", {
+    staticClass: "nav-link",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Tags")])])])])])]);
+}];
 render._withStripped = true;
 
 
@@ -2174,17 +2240,12 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
   return _c("main", [_c("div", {
     staticClass: "container"
-  })]);
-}];
+  }, [_c("HomeComponent"), _vm._v(" "), _c("PostsComponent"), _vm._v(" "), _c("TagsComponent")], 1)]);
+};
+
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -2288,10 +2349,19 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div");
+  return _vm._m(0);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("section", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-6 m-auto"
+  }, [_vm._v("\n      Home!\n  ")])]);
+}];
 render._withStripped = true;
 
 
