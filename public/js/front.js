@@ -1932,6 +1932,7 @@ __webpack_require__.r(__webpack_exports__);
     $_sendInput: function $_sendInput() {
       console.log(this.needle);
       this.$emit('searchByTitle', this.needle.trim());
+      this.needle = '';
     },
     $_navActiveOnClick: function $_navActiveOnClick(index) {
       this.navLinks.forEach(function (element) {
@@ -2203,22 +2204,25 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {// needle: '',
-      // posts: [],
-      // isLoaded: false,
+    return {
+      // needle: '',
+      posts: [],
+      isLoaded: false
     };
   },
   methods: {
-    // $_getPosts(needle){
-    //     axios.get('/api/posts/search/' + needle)
-    //     .then((response) => {
-    //         console.log(response.data);
-    //         this.posts = response.data.results;
-    //         this.isLoaded = true;
-    //     }).catch((error) =>{
-    //         console.error(error);
-    //     });
-    // },
+    $_getPosts: function $_getPosts(needle) {
+      var _this = this;
+
+      // console.warn(this.needle);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/posts/search/' + needle).then(function (response) {
+        console.log(response.data);
+        _this.posts = response.data.results;
+        _this.isLoaded = true;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     $_searchInPosts: function $_searchInPosts(needle) {
       console.log(needle);
 
@@ -2470,6 +2474,10 @@ var render = function render() {
       value: _vm.needle
     },
     on: {
+      keyup: function keyup($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.$_sendInput();
+      },
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.needle = $event.target.value.trim();
@@ -2864,16 +2872,14 @@ var render = function render() {
   return _c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-12"
-  }, [_c("h1", [_vm._v("\n                  Searching with: " + _vm._s(_vm.needle) + "\n              ")]), _vm._v(" "), _vm.posts.length > 0 ? _c("div", {
+    staticClass: "col-12 text-center py-5"
+  }, [_vm.posts.length > 0 ? _c("div", {
     staticClass: "text-center"
-  }, _vm._l(_vm.posts, function (post) {
-    return _c("div", {
+  }, [_c("h1", [_vm._v("\n              Posts with this title: \n          ")]), _vm._v(" "), _vm._l(_vm.posts, function (post) {
+    return _c("h1", {
       key: post.id
-    }, [_vm._v("\n                      " + _vm._s(post.title) + "\n                  ")]);
-  }), 0) : _c("div", [_vm._v("\n                  Nessun risultato :/\n              ")])]), _vm._v(" "), _vm.isLoaded ? _c("div", {
-    staticClass: "text-center my-3"
-  }, [_vm._v("\n              Fai una ricerca! \n          ")]) : _vm._e()]);
+    }, [_vm._v("\n              " + _vm._s(post.title) + "\n          ")]);
+  })], 2) : _c("h3", [_vm._v("\n          Nessun risultato :/\n      ")])])]);
 };
 
 var staticRenderFns = [];

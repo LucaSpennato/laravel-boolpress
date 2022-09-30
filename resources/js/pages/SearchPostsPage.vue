@@ -1,28 +1,19 @@
 <template>
   <div class="row">
         
-
-        <div class="col-12">
-            
-                <h1>
-                    Searching with: {{ needle }}
-                </h1>
-                <div class="text-center" v-if="posts.length > 0">
-                    <div v-for="post in posts" :key="post.id">
-                        {{ post.title }}
-                    </div>
-                </div>
-                <div v-else>
-                    Nessun risultato :/
-                </div>
+    <div class="col-12 text-center py-5">
+        <div class="text-center" v-if="posts.length > 0">
+            <h1>
+                Posts with this title: 
+            </h1>
+            <h1 v-for="post in posts" :key="post.id">
+                {{ post.title }}
+            </h1>
         </div>
-
-            <!-- <div class="text-center my-3" v-else> -->
-            <div class="text-center my-3" v-if="isLoaded">
-                Fai una ricerca! 
-            </div>
-
-        <!-- </div> -->
+        <h3 v-else>
+            Nessun risultato :/
+        </h3>
+    </div>
   </div>
 </template>
 
@@ -32,26 +23,27 @@ import axios from 'axios';
 export default {
     name: 'SearchPostsPage',
     props:{
-        posts:{type: [Array, Object], required: false},
+        posts: {type: [Array, Object], required: false},
     },
     data(){
         return{
             // needle: '',
-            // posts: [],
-            // isLoaded: false,
+            posts: [],
+            isLoaded: false,
         }
     },
     methods:{
-        // $_getPosts(needle){
-        //     axios.get('/api/posts/search/' + needle)
-        //     .then((response) => {
-        //         console.log(response.data);
-        //         this.posts = response.data.results;
-        //         this.isLoaded = true;
-        //     }).catch((error) =>{
-        //         console.error(error);
-        //     });
-        // },
+        $_getPosts(needle){
+            // console.warn(this.needle);
+            axios.get('/api/posts/search/' + needle)
+            .then((response) => {
+                console.log(response.data);
+                this.posts = response.data.results;
+                this.isLoaded = true;
+            }).catch((error) =>{
+                console.error(error);
+            });
+        },
 
         $_searchInPosts(needle){
             console.log(needle);
@@ -59,7 +51,7 @@ export default {
                 this.$_getPosts(needle);
             }
         }
-    }
+    },
 }
 </script>
 

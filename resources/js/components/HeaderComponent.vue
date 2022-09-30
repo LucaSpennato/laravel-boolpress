@@ -22,7 +22,7 @@
             </ul>
                 <div class="d-flex text-end" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                    v-model.trim="needle">
+                    v-model.trim="needle" @keyup.enter="$_sendInput()">
                     <a class="btn btn-outline-success" @click="$_sendInput()">
                         Search
                     </a>
@@ -51,6 +51,7 @@ export default {
         $_sendInput(){
             console.log(this.needle);
             this.$emit('searchByTitle', this.needle.trim());
+            this.needle = '';
         },
 
         $_navActiveOnClick(index) {
