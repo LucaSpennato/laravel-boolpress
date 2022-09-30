@@ -19760,7 +19760,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
   // ? definiamo le rotte!
   routes: [{
-    path: '/home',
+    path: '/',
     name: 'home',
     component: _pages_HomeComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   }, {

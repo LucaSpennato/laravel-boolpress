@@ -21,7 +21,7 @@ const router = new VueRouter({
     // ? definiamo le rotte!
     routes:[
         {
-            path: '/home',
+            path: '/',
             name: 'home',
             component: HomeComponent,
         },
