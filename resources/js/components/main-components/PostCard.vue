@@ -3,7 +3,8 @@
             <img :src="post.post_image" class="card-img-top" :alt="post.user.name + '\'s image'">
             <div class="card-body">
                 <h5 class="card-title">
-                    <router-link :to="`/post/${post.id}`" v-if="isShow()">
+                    <router-link :to="{ name: 'singlepost', params: { id: post.id } }" 
+                    v-if="isShow()">
                         {{ post.title }}
                     </router-link>
                     <div>
@@ -25,14 +26,17 @@
 <script>
 export default {
     name: "PostCard",
-    props: {
-        post : Object,
-        required : true,
-    }, 
+    props: { post : Object, required : true }, 
+
+    data(){
+        return {
+            routeId :  this.$route.params.id,
+        }
+    },
 
     methods:{
         isShow(){
-            if(this.$route.params.id !== undefined){
+            if(this.routeId !== undefined){
                 return false;
             }else{
                 return true;

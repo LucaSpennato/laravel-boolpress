@@ -38,7 +38,8 @@ const router = new VueRouter({
             path: '/post/:id',
             name: 'singlepost',
             component: SinglePost,
-        }
+        },
+
     ],
 });
 

@@ -2006,9 +2006,14 @@ __webpack_require__.r(__webpack_exports__);
     post: Object,
     required: true
   },
+  data: function data() {
+    return {
+      routeId: this.$route.params.id
+    };
+  },
   methods: {
     isShow: function isShow() {
-      if (this.$route.params.id !== undefined) {
+      if (this.routeId !== undefined) {
         return false;
       } else {
         return true;
@@ -2421,7 +2426,12 @@ var render = function render() {
     staticClass: "card-title"
   }, [_vm.isShow() ? _c("router-link", {
     attrs: {
-      to: "/post/".concat(_vm.post.id)
+      to: {
+        name: "singlepost",
+        params: {
+          id: _vm.post.id
+        }
+      }
     }
   }, [_vm._v("\n                " + _vm._s(_vm.post.title) + "\n            ")]) : _vm._e(), _vm._v(" "), _c("div", [_vm._v("\n                " + _vm._s(_vm.post.title) + "\n            ")])], 1), _vm._v(" "), _c("h5", {
     staticClass: "card-title"
