@@ -12,7 +12,7 @@
                     :class="{ active_el : link.isActive === true }"
                     @click="navActiveOnClick(index)">
 
-                    <router-link class="nav-link" :to="'/' + link.route">
+                    <router-link class="nav-link" :to="{ name: link.name }">
                         {{ link.name }}
                     </router-link>
                 </li>

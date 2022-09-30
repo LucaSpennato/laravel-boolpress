@@ -2288,7 +2288,9 @@ var render = function render() {
     }, [_c("router-link", {
       staticClass: "nav-link",
       attrs: {
-        to: "/" + link.route
+        to: {
+          name: link.name
+        }
       }
     }, [_vm._v("\n                    " + _vm._s(link.name) + "\n                ")])], 1);
   }), _vm._v(" "), _vm._m(1)], 2)])])])]);
