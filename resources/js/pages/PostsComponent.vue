@@ -9,7 +9,7 @@
         </h1>
 
         <div class="col-12 text-center py-3">
-            <span class="btn btn-primary mx-1 d-inline-block text-light" v-for="index in lastPage" :key="index" @click="paginationNav(index)">
+            <span class="btn btn-primary mx-1 d-inline-block text-light" v-for="index in lastPage" :key="index" @click="$_paginationNav(index)">
             {{ index }}
             </span>
         </div>
@@ -45,13 +45,13 @@ export default {
     
     methods:{
 
-        paginationNav(indexes){
+        $_paginationNav(indexes){
         console.log(indexes);
         this.currentPage = indexes;
-        this.getPosts();
+        this.$_getPosts();
         },
         
-        getPosts(){ 
+        $_getPosts(){ 
             axios.get(this.url + '?',{
             params:{
             page: this.currentPage,
@@ -71,7 +71,7 @@ export default {
         },
     },
     created(){
-        this.getPosts();
+        this.$_getPosts();
     }
 }
 </script>

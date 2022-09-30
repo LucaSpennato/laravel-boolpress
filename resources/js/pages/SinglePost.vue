@@ -2,7 +2,7 @@
 
     <div class="row justify-content-center mt-5" >
         <LoaderComponent v-if="isLoaded"/>
-        <PostCard :key="post.id" :post="post" v-else/>
+        <PostCard :key="post.id" :post="post" :id="id"  v-else/>
     </div>
 
 </template>
@@ -15,6 +15,9 @@ import axios from 'axios';
 
 export default {
     name: "SinglePost",
+    props:{
+        id: { type: Number, required: false },
+    },
     components:{
         PostCard,
         LoaderComponent,

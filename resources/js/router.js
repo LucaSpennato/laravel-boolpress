@@ -43,6 +43,11 @@ const router = new VueRouter({
             props: true,
         },
         {
+            path: '/tags*',
+            redirect: '/tags'
+        },
+        {
+            // ? gli diamo tutti i path non usati, va bene anche path: '*', o più specifico path: '/user-*
             path: '/:catchAll(.*)' ,
             name: 'notfound',
             component: NotFound,

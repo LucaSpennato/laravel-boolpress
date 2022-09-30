@@ -2140,12 +2140,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    paginationNav: function paginationNav(indexes) {
+    $_paginationNav: function $_paginationNav(indexes) {
       console.log(indexes);
       this.currentPage = indexes;
-      this.getPosts();
+      this.$_getPosts();
     },
-    getPosts: function getPosts() {
+    $_getPosts: function $_getPosts() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(this.url + '?', {
@@ -2165,7 +2165,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.getPosts();
+    this.$_getPosts();
   }
 });
 
@@ -2189,6 +2189,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SinglePost",
+  props: {
+    id: {
+      type: Number,
+      required: false
+    }
+  },
   components: {
     PostCard: _components_main_components_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     LoaderComponent: _components_LoaderComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2686,7 +2692,7 @@ var render = function render() {
       staticClass: "btn btn-primary mx-1 d-inline-block text-light",
       on: {
         click: function click($event) {
-          return _vm.paginationNav(index);
+          return _vm.$_paginationNav(index);
         }
       }
     }, [_vm._v("\n          " + _vm._s(index) + "\n          ")]);
@@ -2726,7 +2732,8 @@ var render = function render() {
   }, [_vm.isLoaded ? _c("LoaderComponent") : _c("PostCard", {
     key: _vm.post.id,
     attrs: {
-      post: _vm.post
+      post: _vm.post,
+      id: _vm.id
     }
   })], 1);
 };
@@ -19771,6 +19778,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     // ! passa i dati di sessione senza usare this.$route.params.id
     props: true
   }, {
+    path: '/tags*',
+    redirect: '/tags'
+  }, {
+    // ? gli diamo tutti i path non usati, va bene anche path: '*', o più specifico path: '/user-*
     path: '/:catchAll(.*)',
     name: 'notfound',
     component: _pages_NotFound__WEBPACK_IMPORTED_MODULE_5__["default"]
