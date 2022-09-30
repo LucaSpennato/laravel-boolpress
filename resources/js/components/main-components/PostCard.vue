@@ -26,7 +26,14 @@
 <script>
 export default {
     name: "PostCard",
-    props: { post : Object, required : true }, 
+    props: 
+        { 
+            post:{ type: Object, required: true },
+            // ! Passando i props dal router.js, mettendo props:true, passiamo i parametri come con this.$route.params.id
+            id: { type: Number, required: false }
+        }, 
+
+        
 
     data(){
         return {

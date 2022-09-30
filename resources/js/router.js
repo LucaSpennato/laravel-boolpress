@@ -10,6 +10,7 @@ import HomeComponent from './pages/HomeComponent';
 import PostsComponent from './pages/PostsComponent';
 import TagsComponent from './pages/TagsComponent';
 import SinglePost from './pages/SinglePost';
+import NotFound from './pages/NotFound';
 
 // ! Creiamo un'istanza di vueRouter
 const router = new VueRouter({
@@ -38,6 +39,13 @@ const router = new VueRouter({
             path: '/post/:id',
             name: 'singlepost',
             component: SinglePost,
+            // ! passa i dati di sessione senza usare this.$route.params.id
+            props: true,
+        },
+        {
+            path: '/:catchAll(.*)' ,
+            name: 'notfound',
+            component: NotFound,
         },
 
     ],
