@@ -30,6 +30,12 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * Return a research with in posts table under a like operator with title parameter.
+     *
+     * @param String $title
+     * @return Array
+     */
     public function searchByTitle($title){
 
         $posts = Post::where('title', 'LIKE', '%' . $title . '%')->get();
@@ -45,6 +51,7 @@ class PostController extends Controller
             return response('', 204);
         }
     }
+
 
     /**
      * Show the form for creating a new resource.
