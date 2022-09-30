@@ -5,9 +5,13 @@ import VueRouter from 'vue-router';
 
 // Vue.use(VueRouter);
 
-// ! importiamo le pages alle quali daremo una rotta
+// ! importiamo le pages alle quali daremo una rotta 
+// ! Attenzione all'ordine, le rotte cambiano anche in base a questo! Potrebbero non essere trovate perchè sovrascritte da altro!
 import HomeComponent from './pages/HomeComponent';
 import PostsComponent from './pages/PostsComponent';
+
+import SearchPostsPage from './pages/SearchPostsPage';
+
 import TagsComponent from './pages/TagsComponent';
 import SinglePost from './pages/SinglePost';
 import NotFound from './pages/NotFound';
@@ -34,6 +38,11 @@ const router = new VueRouter({
             path: '/tags',
             name: 'tags',
             component: TagsComponent,
+        },
+        {
+            path: '/posts/search/',
+            name: 'searchtitle',
+            component: SearchPostsPage,
         },
         {
             path: '/post/:id',

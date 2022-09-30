@@ -30,6 +30,22 @@ class PostController extends Controller
         ]);
     }
 
+    public function searchByTitle($title){
+
+        $posts = Post::where('title', 'LIKE', '%' . $title . '%')->get();
+
+        // dd($posts);
+
+        if(count($posts) > 0){
+            return response()->json([
+                "success" => true,
+                "results" => $posts,
+            ]);
+        }else{
+            return response('', 204);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -83,6 +99,7 @@ class PostController extends Controller
         //     "data" => $post,
         // ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
