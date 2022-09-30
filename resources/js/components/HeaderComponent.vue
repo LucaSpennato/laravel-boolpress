@@ -33,9 +33,9 @@ export default {
         return{
             navLinks:[
                 
-                { route: 'home', name: 'home', isActive: true  },
-                { route: 'posts', name: 'posts', isActive: false },
-                { route: 'tags', name: 'tags', isActive: false },
+                { route: '/home', name: 'home', isActive: true  },
+                { route: '/posts', name: 'posts', isActive: false },
+                { route: '/tags', name: 'tags', isActive: false },
             ],
         }
     },
