@@ -7,10 +7,10 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li v-for="(link, index) in navLinks" :key="index" class="nav-item text-capitalize" 
                     :class="{ active_el : link.isActive === true }"
-                    @click="navActiveOnClick(index)">
+                    @click="$_navActiveOnClick(index)">
 
                     <router-link class="nav-link" :to="{ name: link.name }">
                         {{ link.name }}
@@ -20,6 +20,13 @@
                     <a class="nav-link" href="/admin/users">Admin</a>
                 </li>
             </ul>
+                <div class="d-flex text-end" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                    v-model.trim="needle">
+                    <a class="btn btn-outline-success" @click="$_sendInput()">
+                        Search
+                    </a>
+                </div>
             </div>
         </div>
         </nav>
@@ -31,6 +38,7 @@ export default {
     name: "HeaderComponent",
     data: function(){
         return{
+            needle: null,
             navLinks:[
                 
                 { route: '/home', name: 'home', isActive: true  },
@@ -40,7 +48,12 @@ export default {
         }
     },
     methods:{
-        navActiveOnClick(index) {
+        $_sendInput(){
+            console.log(this.needle);
+            this.$emit('searchByTitle', this.needle.trim());
+        },
+
+        $_navActiveOnClick(index) {
             this.navLinks.forEach((element) => {
                 element.isActive = false;
             });

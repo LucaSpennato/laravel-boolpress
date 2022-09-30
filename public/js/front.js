@@ -1912,6 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "HeaderComponent",
   data: function data() {
     return {
+      needle: null,
       navLinks: [{
         route: '/home',
         name: 'home',
@@ -1928,7 +1929,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    navActiveOnClick: function navActiveOnClick(index) {
+    $_sendInput: function $_sendInput() {
+      console.log(this.needle);
+      this.$emit('searchByTitle', this.needle.trim());
+    },
+    $_navActiveOnClick: function $_navActiveOnClick(index) {
       this.navLinks.forEach(function (element) {
         element.isActive = false;
       });
@@ -1994,6 +1999,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MainComponent",
+  props: {
+    posts: {
+      type: [Array, Object],
+      required: false
+    }
+  },
   components: {},
   computed: {//  arePosts: function(){
     //   if(this.topic === "posts"){
@@ -2185,28 +2196,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SearchPostsPage',
+  props: {
+    posts: {
+      type: [Array, Object],
+      required: false
+    }
+  },
   data: function data() {
-    return {
-      needle: '',
-      posts: [],
-      isLoaded: false
+    return {// needle: '',
+      // posts: [],
+      // isLoaded: false,
     };
   },
   methods: {
-    $_getPosts: function $_getPosts(needle) {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/posts/search/' + needle).then(function (response) {
-        console.log(response.data);
-        _this.posts = response.data.results;
-        _this.isLoaded = true;
-      })["catch"](function (error) {
-        console.error(error);
-      });
-    },
+    // $_getPosts(needle){
+    //     axios.get('/api/posts/search/' + needle)
+    //     .then((response) => {
+    //         console.log(response.data);
+    //         this.posts = response.data.results;
+    //         this.isLoaded = true;
+    //     }).catch((error) =>{
+    //         console.error(error);
+    //     });
+    // },
     $_searchInPosts: function $_searchInPosts(needle) {
       console.log(needle);
-      this.$_getPosts(needle);
+
+      if (needle !== '') {
+        this.$_getPosts(needle);
+      }
     }
   }
 });
@@ -2332,6 +2350,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MainComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/MainComponent.vue */ "./resources/js/components/MainComponent.vue");
 /* harmony import */ var _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue");
 /* harmony import */ var _components_HistoryRouteNav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/HistoryRouteNav.vue */ "./resources/js/components/HistoryRouteNav.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -2341,6 +2362,33 @@ __webpack_require__.r(__webpack_exports__);
     MainComponent: _components_MainComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     HeaderComponent: _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     HistoryRouteNav: _components_HistoryRouteNav_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      posts: []
+    };
+  },
+  methods: {
+    $_getPostsByTitle: function $_getPostsByTitle(needle) {
+      var _this = this;
+
+      if (needle !== undefined && needle !== null && needle !== '') {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/posts/search/' + needle).then(function (response) {
+          console.log(response);
+          _this.posts = response.data.results;
+
+          if (_this.posts.length > 0) {
+            console.log('ciao');
+
+            _this.$router.push({
+              name: 'searchtitle'
+            });
+          }
+        })["catch"](function (error) {
+          console.warn(error);
+        });
+      }
+    }
   }
 });
 
@@ -2376,7 +2424,7 @@ var render = function render() {
       id: "navbarNav"
     }
   }, [_c("ul", {
-    staticClass: "navbar-nav"
+    staticClass: "navbar-nav me-auto mb-2 mb-lg-0"
   }, [_vm._l(_vm.navLinks, function (link, index) {
     return _c("li", {
       key: index,
@@ -2386,7 +2434,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          return _vm.navActiveOnClick(index);
+          return _vm.$_navActiveOnClick(index);
         }
       }
     }, [_c("router-link", {
@@ -2397,7 +2445,47 @@ var render = function render() {
         }
       }
     }, [_vm._v("\n                    " + _vm._s(link.name) + "\n                ")])], 1);
-  }), _vm._v(" "), _vm._m(1)], 2)])])])]);
+  }), _vm._v(" "), _vm._m(1)], 2), _vm._v(" "), _c("div", {
+    staticClass: "d-flex text-end",
+    attrs: {
+      role: "search"
+    }
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model.trim",
+      value: _vm.needle,
+      expression: "needle",
+      modifiers: {
+        trim: true
+      }
+    }],
+    staticClass: "form-control me-2",
+    attrs: {
+      type: "search",
+      placeholder: "Search",
+      "aria-label": "Search"
+    },
+    domProps: {
+      value: _vm.needle
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.needle = $event.target.value.trim();
+      },
+      blur: function blur($event) {
+        return _vm.$forceUpdate();
+      }
+    }
+  }), _vm._v(" "), _c("a", {
+    staticClass: "btn btn-outline-success",
+    on: {
+      click: function click($event) {
+        return _vm.$_sendInput();
+      }
+    }
+  }, [_vm._v("\n                    Search\n                ")])])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -2532,7 +2620,11 @@ var render = function render() {
 
   return _c("main", [_c("div", {
     staticClass: "container"
-  }, [_c("router-view")], 1)]);
+  }, [_c("router-view", {
+    attrs: {
+      posts: _vm.posts
+    }
+  })], 1)]);
 };
 
 var staticRenderFns = [];
@@ -2772,57 +2864,16 @@ var render = function render() {
   return _c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-3 m-auto"
-  }, [_c("div", {
-    staticClass: "d-flex mt-5",
-    attrs: {
-      role: "search"
-    }
-  }, [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model.trim",
-      value: _vm.needle,
-      expression: "needle",
-      modifiers: {
-        trim: true
-      }
-    }],
-    staticClass: "form-control me-2",
-    attrs: {
-      type: "search",
-      placeholder: "Search",
-      "aria-label": "Search"
-    },
-    domProps: {
-      value: _vm.needle
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.needle = $event.target.value.trim();
-      },
-      blur: function blur($event) {
-        return _vm.$forceUpdate();
-      }
-    }
-  }), _vm._v(" "), _c("a", {
-    staticClass: "btn btn-outline-success",
-    attrs: {
-      type: "submit"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.$_searchInPosts(_vm.needle);
-      }
-    }
-  }, [_vm._v("\n                  Search\n              ")])])]), _vm._v(" "), _c("div", {
     staticClass: "col-12"
-  }, [_c("h1", [_vm._v("\n              " + _vm._s(_vm.needle) + "\n          ")]), _vm._v(" "), _vm.isLoaded ? _c("div", _vm._l(_vm.posts, function (post) {
+  }, [_c("h1", [_vm._v("\n                  Searching with: " + _vm._s(_vm.needle) + "\n              ")]), _vm._v(" "), _vm.posts.length > 0 ? _c("div", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.posts, function (post) {
     return _c("div", {
       key: post.id
-    }, [_vm._v("\n                  " + _vm._s(post.title) + "\n              ")]);
-  }), 0) : _c("div", [_vm._v("\n              ciao\n          ")])])]);
+    }, [_vm._v("\n                      " + _vm._s(post.title) + "\n                  ")]);
+  }), 0) : _c("div", [_vm._v("\n                  Nessun risultato :/\n              ")])]), _vm._v(" "), _vm.isLoaded ? _c("div", {
+    staticClass: "text-center my-3"
+  }, [_vm._v("\n              Fai una ricerca! \n          ")]) : _vm._e()]);
 };
 
 var staticRenderFns = [];
@@ -2915,7 +2966,15 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("HeaderComponent"), _vm._v(" "), _c("HistoryRouteNav"), _vm._v(" "), _c("MainComponent")], 1);
+  return _c("div", [_c("HeaderComponent", {
+    on: {
+      searchByTitle: _vm.$_getPostsByTitle
+    }
+  }), _vm._v(" "), _c("HistoryRouteNav"), _vm._v(" "), _c("MainComponent", {
+    attrs: {
+      posts: _vm.posts
+    }
+  })], 1);
 };
 
 var staticRenderFns = [];

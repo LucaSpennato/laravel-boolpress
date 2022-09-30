@@ -11,7 +11,7 @@
             </select>
           </div>
         </div> -->
-        <router-view></router-view>
+        <router-view :posts="posts"></router-view>
         
     </div>
   </main>
@@ -21,6 +21,9 @@
 
 export default {
     name: "MainComponent",
+    props:{
+      posts:{ type: [Array, Object], required: false },
+    },
     components:{
 
     },
