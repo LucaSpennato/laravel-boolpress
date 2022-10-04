@@ -22,6 +22,7 @@ Route::namespace('Api')->group(function() {
     Route::get('/posts', 'PostController@index');
     Route::get('/post/{id}', 'PostController@show');
     Route::get('/posts/search/{title}', 'PostController@searchByTitle');
+    Route::get('/posts/search/advanced/{tag}', 'PostController@advancedPostsSearch');
     // ? in questo modo, se non sei autenticato, non ti permette di far nulla, anzi, ti porta nella pagina di login
     Route::middleware('auth:api')->delete('/post/{id}', 'PostController@destroy');
 

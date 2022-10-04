@@ -2206,7 +2206,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       // needle: '',
-      posts: [],
+      foundPosts: [],
       isLoaded: false
     };
   },
@@ -2217,7 +2217,7 @@ __webpack_require__.r(__webpack_exports__);
       // console.warn(this.needle);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/posts/search/' + needle).then(function (response) {
         console.log(response.data);
-        _this.posts = response.data.results;
+        _this.foundPosts = response.data.results;
         _this.isLoaded = true;
       })["catch"](function (error) {
         console.error(error);
@@ -2872,14 +2872,28 @@ var render = function render() {
   return _c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-12 text-center py-5"
-  }, [_vm.posts.length > 0 ? _c("div", {
+    staticClass: "col-6 m-auto py-5"
+  }, [_vm.posts.length > 0 ? _c("div", [_c("h1", {
     staticClass: "text-center"
-  }, [_c("h1", [_vm._v("\n              Posts with this title: \n          ")]), _vm._v(" "), _vm._l(_vm.posts, function (post) {
-    return _c("h1", {
-      key: post.id
-    }, [_vm._v("\n              " + _vm._s(post.title) + "\n          ")]);
-  })], 2) : _c("h3", [_vm._v("\n          Nessun risultato :/\n      ")])])]);
+  }, [_vm._v("\n              Posts with this title: \n          ")]), _vm._v(" "), _c("ul", {
+    staticClass: "list-group"
+  }, _vm._l(_vm.posts, function (post) {
+    return _c("li", {
+      key: post.id,
+      staticClass: "list-group-item d-inline-flex justify-content-between"
+    }, [_c("span", [_c("router-link", {
+      attrs: {
+        to: {
+          name: "singlepost",
+          params: {
+            id: post.id
+          }
+        }
+      }
+    }, [_vm._v(_vm._s(post.id) + " | " + _vm._s(post.title))])], 1), _vm._v(" "), _c("span", [_vm._v("\n                      Author: " + _vm._s(post.user.name) + "\n                  ")])]);
+  }), 0)]) : _c("h3", {
+    staticClass: "text-center"
+  }, [_vm._v("\n          Nessun risultato :/\n      ")])])]);
 };
 
 var staticRenderFns = [];

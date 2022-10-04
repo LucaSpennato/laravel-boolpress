@@ -38,7 +38,7 @@ class PostController extends Controller
      */
     public function searchByTitle($title){
 
-        $posts = Post::where('title', 'LIKE', '%' . $title . '%')->get();
+        $posts = Post::where('title', 'LIKE', '%' . $title . '%')->with('user')->get();
 
         // dd($posts);
 
@@ -50,6 +50,18 @@ class PostController extends Controller
         }else{
             return response('', 204);
         }
+    }
+
+    public function advancedPostsSearch(Request $request, $id){
+
+        $data = $request->all();
+        
+        if($request->has('tag')){
+            $needle = $data['tag'];
+            // dd($needle);
+        }
+        
+        // $posts = Post::with('tags')->find($id);
     }
 
 
@@ -88,6 +100,8 @@ class PostController extends Controller
         // ! Con find or fail funzionerebbe allo stesso modo, ma restituisce l'intera pagina di 404, rallentando il tutto
         // ? insieme a with, possiamo mandare altre informazioni, vengono definite eager loading
         $post = Post::with('user', 'tags')->find($id);
+
+        // dd($post, 'show');
 
         if($post){
             return response()->json([
