@@ -10,7 +10,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li v-for="(link, index) in navLinks" :key="index" class="nav-item text-capitalize" 
                     :class="{ active_el : link.isActive === true }"
-                    @click="$_navActiveOnClick(index)">
+                    @click="$_getNavIndex(index)">
 
                     <router-link class="nav-link" :to="{ name: link.name }">
                         {{ link.name }}
@@ -39,6 +39,8 @@ export default {
     data: function(){
         return{
             needle: null,
+            urlPath: '',
+            navIndex: null,
             navLinks:[
                 
                 { route: '/home', name: 'home', isActive: true  },
@@ -49,20 +51,37 @@ export default {
     },
     methods:{
         $_sendInput(){
-            console.log(this.needle);
             this.$emit('searchByTitle', this.needle.trim());
             this.needle = '';
+            this.urlPath = '';
         },
+
+        $_getNavIndex(index){
+            this.navIndex = index;
+            this.urlPath = this.$route.name; 
+        },  
 
         $_navActiveOnClick(index) {
             this.navLinks.forEach((element) => {
                 element.isActive = false;
             });
 
-            if(this.$route.name == this.navLinks[index].name){
+            this.urlPath = this.$route.name; 
+
+            if(this.urlPath == this.navLinks[index].name){
                 this.navLinks[index].isActive = true;
             }
         },
+    },
+    watch:{
+        urlPath(newPath, oldPath){
+
+            if(newPath != oldPath){
+                console.log('route-changed');
+                this.$_navActiveOnClick(this.navIndex);
+                console.log(this.urlPath);
+            }
+        }
     },
     created(){
         // ? contiene tutte le informazioni della rotta!

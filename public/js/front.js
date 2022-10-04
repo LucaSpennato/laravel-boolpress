@@ -1913,6 +1913,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       needle: null,
+      urlPath: '',
+      navIndex: null,
       navLinks: [{
         route: '/home',
         name: 'home',
@@ -1930,17 +1932,31 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     $_sendInput: function $_sendInput() {
-      console.log(this.needle);
       this.$emit('searchByTitle', this.needle.trim());
       this.needle = '';
+      this.urlPath = '';
+    },
+    $_getNavIndex: function $_getNavIndex(index) {
+      this.navIndex = index;
+      this.urlPath = this.$route.name;
     },
     $_navActiveOnClick: function $_navActiveOnClick(index) {
       this.navLinks.forEach(function (element) {
         element.isActive = false;
       });
+      this.urlPath = this.$route.name;
 
-      if (this.$route.name == this.navLinks[index].name) {
+      if (this.urlPath == this.navLinks[index].name) {
         this.navLinks[index].isActive = true;
+      }
+    }
+  },
+  watch: {
+    urlPath: function urlPath(newPath, oldPath) {
+      if (newPath != oldPath) {
+        console.log('route-changed');
+        this.$_navActiveOnClick(this.navIndex);
+        console.log(this.urlPath);
       }
     }
   },
@@ -2444,7 +2460,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          return _vm.$_navActiveOnClick(index);
+          return _vm.$_getNavIndex(index);
         }
       }
     }, [_c("router-link", {
