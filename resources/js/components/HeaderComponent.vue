@@ -58,10 +58,16 @@ export default {
             this.navLinks.forEach((element) => {
                 element.isActive = false;
             });
-            console.warn(index);
-            this.navLinks[index].isActive = true;
+
+            if(this.$route.name == this.navLinks[index].name){
+                this.navLinks[index].isActive = true;
+            }
         },
     },
+    created(){
+        // ? contiene tutte le informazioni della rotta!
+        console.log(this.$route);
+    }
 }
 </script>
 

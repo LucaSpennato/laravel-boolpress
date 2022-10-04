@@ -1938,9 +1938,15 @@ __webpack_require__.r(__webpack_exports__);
       this.navLinks.forEach(function (element) {
         element.isActive = false;
       });
-      console.warn(index);
-      this.navLinks[index].isActive = true;
+
+      if (this.$route.name == this.navLinks[index].name) {
+        this.navLinks[index].isActive = true;
+      }
     }
+  },
+  created: function created() {
+    // ? contiene tutte le informazioni della rotta!
+    console.log(this.$route);
   }
 });
 
