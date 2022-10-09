@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::namespace('Api')->group(function() {
+    Route::post('/apilogin', 'UserController@index');
+    Route::middleware('auth:santcum')->get('/apiuser', 'UserController@user');
     Route::middleware('auth:sanctum')->get('/posts', 'PostController@index');
     // Route::get('/posts', 'PostController@index');
     Route::get('/post/{id}', 'PostController@show');

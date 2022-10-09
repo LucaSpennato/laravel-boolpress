@@ -25,14 +25,15 @@ class PostController extends Controller
         // ? Ed anche paginare, che ci darà current page, next e last page "next_page_url": "http://127.0.0.1:8000/api/posts?page=2",
         // ? per chiamare più relazioni, basta inserire la virgola nel with o metterlo in array. Bisogna rispettare le regole delle relazioni.
         $posts = Post::with('user', 'tags')->paginate(10);
-
-        // dd($user);
-
-        return response()->json([
-            "success" => true,
-            // "count" => count($posts),
-            "results" => $posts,
-        ]);
+        if(Auth::user()){
+            return response()->json([
+                "success" => true,
+                // "count" => count($posts),
+                "results" => $posts,
+            ]);
+        }else{
+            return response('Unauthorized', 401);
+        }
     }
 
     /**
@@ -59,7 +60,7 @@ class PostController extends Controller
 
     public function advancedPostsSearch(Request $request, $id){
 
-        $data = $request->all();
+        $data = $request->all(); 
         
         if($request->has('tag')){
             $needle = $data['tag'];
