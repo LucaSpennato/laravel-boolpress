@@ -153,6 +153,7 @@ return [
     |
     */
 
+    // TODO: Check this if do not work
     'domain' => env('SESSION_DOMAIN', null),
 
     /*

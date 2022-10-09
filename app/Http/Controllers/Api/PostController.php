@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Admin\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Monolog\Handler\BrowserConsoleHandler;
+use Symfony\Component\HttpKernel\HttpKernelBrowser;
 
 class PostController extends Controller
 {
@@ -13,7 +16,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $posts = Post::all();
         // ? Questo ci permette di passare anche l'user di ogni post, chiaramente non anche la password, è protetta nel model user!
@@ -22,6 +25,8 @@ class PostController extends Controller
         // ? Ed anche paginare, che ci darà current page, next e last page "next_page_url": "http://127.0.0.1:8000/api/posts?page=2",
         // ? per chiamare più relazioni, basta inserire la virgola nel with o metterlo in array. Bisogna rispettare le regole delle relazioni.
         $posts = Post::with('user', 'tags')->paginate(10);
+
+        // dd($user);
 
         return response()->json([
             "success" => true,
